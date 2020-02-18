@@ -8,7 +8,7 @@ public class Application {
 		String attemptNo = InputView.inputAttemptNumber();
 
 		GameManager gameManager = createGameManager(carsName, attemptNo);
-		while (!gameManager.isEnd()) {
+		while (!gameManager.isContinue()) {
 			OutputView.printRacingResults(gameManager.race());
 		}
 		OutputView.printWinners(gameManager.findWinners());

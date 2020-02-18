@@ -26,7 +26,7 @@ public class Cars {
 
 	public RacingResult moveByIndex(int index, RandomNo randomNo) {
 		Car car = cars.get(index);
-		car.move(randomNo);
+		car.isMove(randomNo);
 		return new RacingResult(car.getName(), car.getPosition());
 	}
 

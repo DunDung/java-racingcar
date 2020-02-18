@@ -8,13 +8,13 @@ public class CarTest {
 	@Test
 	void isMove_전진_성공() {
 		Car car = new Car("타미");
-		assertThat(car.move(new RandomNo(4))).isTrue();
+		assertThat(car.isMove(new RandomNo(4))).isTrue();
 	}
 
 	@Test
 	void isMove_전진_실패() {
 		Car car = new Car("타미");
-		assertThat(car.move(new RandomNo(3))).isFalse();
+		assertThat(car.isMove(new RandomNo(3))).isFalse();
 	}
 
 	@Test

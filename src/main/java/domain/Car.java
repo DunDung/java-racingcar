@@ -15,7 +15,7 @@ public class Car {
 		this.position = position;
 	}
 
-	public boolean move(RandomNo randomNo) {
+	public boolean isMove(RandomNo randomNo) {
 		if (randomNo.isMove()) {
 			position++;
 			return true;
