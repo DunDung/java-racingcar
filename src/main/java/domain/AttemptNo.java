@@ -1,6 +1,8 @@
 package domain;
 
-public class AttemptNo {
+import java.util.Iterator;
+
+public class AttemptNo implements Iterator<Integer> {
 	private static final String NOT_INTEGER_MESSAGE = "정수가 아닙니다.";
 	private static final String NOT_POSITIVE_MESSAGE = "양수가 아닙니다.";
 	private static final int MIN_ATTEMPT_NUMBER = 1;
@@ -27,15 +29,14 @@ public class AttemptNo {
 		}
 	}
 
-	public boolean execute() {
-		if (!isEnd()) {
-			this.number--;
-			return true;
-		}
-		return false;
+
+	@Override
+	public boolean hasNext() {
+		return this.number < MIN_ATTEMPT_NUMBER;
 	}
 
-	public boolean isEnd() {
-		return this.number < MIN_ATTEMPT_NUMBER;
+	@Override
+	public Integer next() {
+		return this.number--;
 	}
 }

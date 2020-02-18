@@ -24,28 +24,22 @@ public class AttemptNoTest {
 	}
 
 	@Test
-	void isEndTest_1이상() {
+	void hasNextTest_1이상() {
 		AttemptNo attemptNo = new AttemptNo("1");
-		assertThat(attemptNo.isEnd()).isFalse();
+		assertThat(attemptNo.hasNext()).isTrue();
 	}
 
 	@Test
-	void isEndTest_1미만() {
+	void hasNextTest_1미만() {
 		AttemptNo attemptNo = new AttemptNo("1");
-		attemptNo.execute();        // No -> 0
-		assertThat(attemptNo.isEnd()).isTrue();
+		attemptNo.next();        // No -> 0
+		assertThat(attemptNo.hasNext()).isFalse();
 	}
 
 	@Test
-	void executeTest_실행_가능할_때() {
-		AttemptNo attemptNo = new AttemptNo("1");
-		assertThat(attemptNo.execute()).isTrue();
-	}
-
-	@Test
-	void executeTest_실행_불가능할_때() {
-		AttemptNo attemptNo = new AttemptNo("1");
-		attemptNo.execute();		// No -> 0
-		assertThat(attemptNo.execute()).isFalse();
+	void nextTest() {
+		AttemptNo attemptNo = new AttemptNo("2");
+		assertThat(attemptNo.next()).isEqualTo(2);
+		assertThat(attemptNo.next()).isEqualTo(1);
 	}
 }
