@@ -2,33 +2,29 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import utils.RandomUtils;
 
 public class GameManager {
 	private static final int RANDOM_BOUND = 10;
-	private static final String ATTEMPT_NO_EXCESS = "실행 횟수를 초과하였습니다.";
 
-	private final Random random;
 	private final Cars cars;
 	private final AttemptNo attemptNo;
 
 	public GameManager(String carNames, String attemptNumber) {
 		this.cars = new Cars(CarGenerator.create(carNames));
 		this.attemptNo = new AttemptNo(attemptNumber);
-		this.random = new Random();
 	}
 
 	public RacingResults race() {
-		if (attemptNo.execute()) {
-			List<RacingResult> results = new ArrayList<>();
-			int carsSize = cars.getSize();
-			for (int count = 0; count < carsSize; count++) {
-				RacingResult racingResult = cars.moveByIndex(count, new RandomNo(getRandomNumber()));
-				results.add(racingResult);
-			}
-			return new RacingResults(results);
+		List<RacingResult> results = new ArrayList<>();
+		int carsSize = cars.getSize();
+		for (int count = 0; count < carsSize; count++) {
+			RandomNo randomNo = new RandomNo(RandomUtils.getNumber(RANDOM_BOUND));
+			RacingResult racingResult = cars.moveByIndex(count, randomNo);
+			results.add(racingResult);
 		}
-		throw new IllegalArgumentException(ATTEMPT_NO_EXCESS);
+		return new RacingResults(results);
 	}
 
 	public Cars findWinners() {
@@ -37,11 +33,8 @@ public class GameManager {
 		return new Cars(winners);
 	}
 
-	private int getRandomNumber() {
-		return random.nextInt(RANDOM_BOUND);
-	}
 
-	public boolean isEnd() {
-		return attemptNo.isEnd();
+	public boolean isContinue() {
+		return attemptNo.hasNext();
 	}
 }
